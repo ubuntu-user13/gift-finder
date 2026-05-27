@@ -1,0 +1,182 @@
+# Gift Finder - Setup Guide
+
+## Prerequisites
+
+- A modern web browser (Chrome, Firefox, Safari, Edge)
+- A free Groq API key
+- Internet connection
+
+## Step 1: Get a Groq API Key
+
+1. Go to [console.groq.com](https://console.groq.com)
+2. Sign up (free, no credit card required)
+3. Navigate to the API keys section
+4. Create a new API key
+5. Copy the key (looks like: `gsk_...`)
+
+**Free Tier Limits:**
+- 30 requests per minute
+- 14,400 requests per day
+- No credit card required
+- Sufficient for personal use
+
+## Step 2: Install Gift Finder
+
+### Option A: Local File (Simplest)
+
+1. Download `gift-finder-groq.html`
+2. Double-click the file to open in your browser
+3. Paste your API key in the "Groq API Key" field
+4. Fill out the form and find gifts!
+
+### Option B: Web Server (Recommended for Sharing)
+
+1. Upload `gift-finder-groq.html` to your web server
+2. Access via: `https://yourdomain.com/gift-finder-groq.html`
+3. Share the link with others
+
+### Option C: Local Development Server
+
+```bash
+# Using Python 3
+python -m http.server 8000
+
+# Using Python 2
+python -m SimpleHTTPServer 8000
+
+# Using Node.js (npm install -g http-server)
+http-server
+
+# Using PHP
+php -S localhost:8000
+```
+
+Then open: `http://localhost:8000/gift-finder-groq.html`
+
+## Step 3: First Run
+
+1. Open the HTML file in your browser
+2. Enter your Groq API key (it will be saved locally)
+3. Fill in the gift finder form:
+   - **Interests**: List hobbies, interests (comma or line separated)
+   - **Personality**: Choose from 7 types
+   - **Occasion**: Birthday, Holiday, etc.
+   - **Budget**: Set with slider ($10-$2000)
+4. Click "Find Gift Ideas"
+5. Wait 10-15 seconds for results
+6. Click gift dots to see details and buy links
+
+## Troubleshooting
+
+### "Invalid API Key"
+- Check that your key starts with `gsk_`
+- Verify you copied it correctly from console.groq.com
+- Ensure your API key hasn't been revoked
+
+### "API request timeout"
+- Free tier has rate limits (30/minute)
+- Wait a moment and try again
+- Consider upgrading to paid tier if making frequent requests
+
+### "No products found"
+- Try more specific interests (e.g., "mechanical keyboards" vs "tech")
+- Niche products may not have reliable data
+- The AI will still generate good recommendations with estimated prices
+
+### Chart not showing
+- Make sure JavaScript is enabled
+- Try a different browser
+- Clear browser cache and reload
+
+### API key keeps disappearing
+- Your browser's localStorage is disabled
+- Enter the key each time, or enable localStorage in settings
+
+## Configuration
+
+### Change AI Model
+
+Edit `gift-finder-groq.html` around line 500, change this line:
+
+```javascript
+model: 'mixtral-8x7b-32768',
+```
+
+To one of:
+- `'mixtral-8x7b-32768'` (fastest, recommended)
+- `'llama-3.1-70b-versatile'` (most capable, slower)
+- `'llama-3.1-8b-instant'` (smallest, fastest)
+
+### Adjust Budget Range
+
+Find this in the HTML form (around line 200):
+
+```html
+<input type="range" id="budget" min="10" max="2000" value="500" step="10">
+```
+
+Change `max="2000"` to your desired maximum.
+
+### Add Custom Personality Types
+
+Find the personality select (around line 190) and add:
+
+```html
+<option value="custom">Your Custom Type</option>
+```
+
+## Performance Tips
+
+1. **Use `mixtral-8x7b-32768`** - Fastest model, good quality
+2. **Clear cache** - Reduces page load time
+3. **Fewer interests** - More focused results, faster processing
+4. **Upgrade Groq plan** - If hitting rate limits
+
+## Security Notes
+
+- API key is stored locally in your browser (localStorage)
+- The key is never sent to any server except groq.com
+- You can clear it anytime by clearing browser data
+- Each person should have their own free API key
+
+## File Structure
+
+```
+gift-finder/
+├── gift-finder-groq.html    ← Main application (everything in one file)
+├── config.js                 ← Configuration (optional, for modular setup)
+├── groq-api.js              ← API module (optional, for modular setup)
+├── chart-renderer.js        ← Chart module (optional, for modular setup)
+├── README.md                ← Full documentation
+├── SETUP.md                 ← This file
+└── LICENSE                  ← MIT License
+```
+
+**Note:** `gift-finder-groq.html` is fully self-contained and works without other files. The `.js` files are for modular/advanced use only.
+
+## Next Steps
+
+- **Customize the UI** - Edit the CSS in the HTML file
+- **Add more stores** - Modify store mappings in the code
+- **Integrate a real API** - Add Amazon/Etsy API integration
+- **Save results** - Add localStorage to save favorite gift lists
+- **Share online** - Deploy to GitHub Pages, Vercel, Netlify, etc.
+
+## Support
+
+- **Groq API Issues**: [Groq Documentation](https://console.groq.com/docs/quickstart)
+- **Browser Issues**: Update your browser or try a different one
+- **Feature Requests**: Fork the repo and customize
+
+## Upgrading
+
+To get faster responses and higher rate limits:
+
+1. Visit [groq.com/pricing](https://groq.com/pricing)
+2. Choose a paid plan
+3. Create a new API key
+4. Paste in Gift Finder
+
+---
+
+**Happy gift hunting!** 
