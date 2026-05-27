@@ -1,4 +1,4 @@
-# 🎁 Gift Finder
+# Gift Finder
 
 An AI-powered gift recommendation engine that finds perfect gifts based on personality, interests, and budget. Uses scatter plot visualization to compare cost vs. happiness score.
 
